@@ -1,6 +1,6 @@
 ---
 const baseUrl = "https://www.lostresprimos.com";
-const socialImagePath = "/img/PixelArt/us_pixelart.png";
+const socialImagePath = "/img/social/og-image.jpg";
 const socialImageUrl = `${baseUrl}${socialImagePath}`;
 const canonicalUrl = baseUrl;
 ---
@@ -22,6 +22,10 @@ const canonicalUrl = baseUrl;
 		<meta property="og:title" content="Los Tres Primos" />
 		<meta property="og:description" content="LTP GameDev Studio - Indie Game Development" />
 		<meta property="og:image" content={socialImageUrl} />
+		<meta property="og:image:secure_url" content={socialImageUrl} />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content="Los Tres Primos" />
 		
 		<!-- Twitter Card Tags -->
