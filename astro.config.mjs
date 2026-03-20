@@ -4,7 +4,7 @@ import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://spy0x.github.io/CoderHouse-DesarrolloWeb/",
+  site: "https://ltp-astro-website.vercel.app/",
   integrations: [react()],
 
   vite: {
