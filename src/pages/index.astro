@@ -1,10 +1,37 @@
+---
+const baseUrl = "https://www.lostresprimos.com";
+const socialImagePath = "/img/PixelArt/us_pixelart.png";
+const socialImageUrl = `${baseUrl}${socialImagePath}`;
+const canonicalUrl = baseUrl;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Los Tres Primos - Indie Game Development Studio" />
+		<meta name="author" content="Los Tres Primos" />
+		<title>Los Tres Primos</title>
+		<link rel="canonical" href={canonicalUrl} />
+		
+		<!-- Open Graph Tags -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Los Tres Primos" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:title" content="Los Tres Primos" />
+		<meta property="og:description" content="LTP GameDev Studio - Indie Game Development" />
+		<meta property="og:image" content={socialImageUrl} />
+		<meta property="og:image:alt" content="Los Tres Primos" />
+		
+		<!-- Twitter Card Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Los Tres Primos" />
+		<meta name="twitter:description" content="LTP GameDev Studio - Indie Game Development" />
+		<meta name="twitter:image" content={socialImageUrl} />
+		
+		<!-- Redirect -->
 		<meta http-equiv="refresh" content="0; url=./en/" />
-		<title>Loading...</title>
 		<script>
 			const browserLanguage = (navigator.language || "en").toLowerCase();
 			const targetPath = browserLanguage.startsWith("es") ? "./es/" : "./en/";
