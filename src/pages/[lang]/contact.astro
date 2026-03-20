@@ -33,8 +33,10 @@ const description = isEs
       <div class="d-flex justify-content-center align-items-center">
         <img src="/img/Bed.png" alt="draw of us thinking game ideas" class="col-4 d-none d-md-block" />
         <div class="d-flex justify-content-center">
-          <form action="#" id="formulario" class="d-flex flex-column">
+          <form action="https://formspree.io/f/xyknvjan" method="POST" id="formulario" class="d-flex flex-column" data-lang={lang}>
             <img data-aos="flip-right" data-aos-duration="500" data-aos-once="true" src="/img/Los3BIG.png" alt="us version pixelart" class="mx-auto d-block form__img" />
+            <input type="text" name="_gotcha" class="d-none" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="_form_started_at" id="form_started_at" value="" />
             <div class="d-flex flex-column mt-3">
               <label for="name">{isEs ? "Nombre" : "Name"}</label>
               <input class="form-control text-dark" type="text" placeholder={isEs ? "Tu nombre" : "Your name"} name="name" required />
@@ -50,6 +52,7 @@ const description = isEs
             <div data-aos="zoom-in" data-aos-duration="500" data-aos-once="true">
               <button type="submit" form="formulario" value="Submit" class="btn form__button d-block mx-auto mt-3">{isEs ? "Enviar" : "Send"}</button>
             </div>
+            <p id="form-feedback" class="text-center mt-3 mb-0 small" role="status" aria-live="polite"></p>
           </form>
         </div>
         <img src="/img/draw_our_faces.png" alt="draw of our faces" class="col-4 d-none d-md-block" />
@@ -57,3 +60,77 @@ const description = isEs
     </article>
   </section>
 </BaseLayout>
+
+<script>
+  const formElement = document.getElementById("formulario");
+  const feedback = document.getElementById("form-feedback");
+  const submitButton = formElement?.querySelector('button[type="submit"]');
+  const startedAtField = document.getElementById("form_started_at");
+
+  if (
+    formElement instanceof HTMLFormElement &&
+    feedback instanceof HTMLElement &&
+    submitButton instanceof HTMLButtonElement &&
+    startedAtField instanceof HTMLInputElement
+  ) {
+    const form: HTMLFormElement = formElement;
+    const feedbackEl: HTMLElement = feedback;
+    const submitBtn: HTMLButtonElement = submitButton;
+    const startedInput: HTMLInputElement = startedAtField;
+    const startedAt = Date.now();
+    startedInput.value = String(startedAt);
+
+    const isSpanish = form.dataset.lang === "es";
+
+    const messages = {
+      sending: isSpanish ? "Enviando mensaje..." : "Sending message...",
+      success: isSpanish ? "¡Mensaje enviado correctamente!" : "Message sent successfully!",
+      error: isSpanish
+        ? "No se pudo enviar el mensaje. Intenta nuevamente."
+        : "Could not send the message. Please try again.",
+      spam: isSpanish
+        ? "Por favor espera unos segundos antes de enviar el formulario."
+        : "Please wait a few seconds before submitting the form.",
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const elapsedMs = Date.now() - startedAt;
+      if (elapsedMs < 3000) {
+        feedbackEl.textContent = messages.spam;
+        feedbackEl.className = "text-center mt-3 mb-0 small text-warning";
+        return;
+      }
+
+      submitBtn.disabled = true;
+      feedbackEl.textContent = messages.sending;
+      feedbackEl.className = "text-center mt-3 mb-0 small text-light";
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Submission failed");
+        }
+
+        form.reset();
+        startedInput.value = String(Date.now());
+        feedbackEl.textContent = messages.success;
+        feedbackEl.className = "text-center mt-3 mb-0 small text-success";
+      } catch {
+        feedbackEl.textContent = messages.error;
+        feedbackEl.className = "text-center mt-3 mb-0 small text-danger";
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  }
+</script>
