@@ -15,8 +15,6 @@ const footerText = lang === "en"
   ? "© 2026 LTP - LOS TRES PRIMOS GAME STUDIO"
   : "© 2026 LTP - ESTUDIO DE JUEGOS LOS TRES PRIMOS";
 
-const socialTitle = "Los Tres Primos";
-const socialDescription = "LTP GameDev Studio";
 const socialImagePath = "/img/PixelArt/us_pixelart.png";
 
 // Construct absolute URLs
@@ -55,14 +53,14 @@ const socialImageUrl = `${baseUrl}${socialImagePath}`;
     <meta property="og:site_name" content="Los Tres Primos" />
     <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={socialTitle} />
-    <meta property="og:description" content={socialDescription} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageUrl} />
     <meta property="og:image:alt" content="Los Tres Primos" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={socialTitle} />
-    <meta name="twitter:description" content={socialDescription} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
   </head>
 
