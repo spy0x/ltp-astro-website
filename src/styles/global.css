@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@import "aos/dist/aos.css";
+
+html:not(.aos-active) [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.language-toggle {
+  position: absolute;
+  top: 0.7rem;
+  right: 1rem;
+  z-index: 20;
+}
+
+.language-toggle .btn {
+  font-family: "Playfair Display SC", serif;
+  letter-spacing: 0.05rem;
+  font-size: 0.85rem;
+}
+
+.nav-link-current {
+  text-decoration: underline;
+}
+
+.nav__items .nav-link {
+  color: rgb(223, 223, 223) !important;
+}
+
+.nav__items .nav-link.active,
+.nav__items .nav-link:focus,
+.nav__items .nav-link:hover {
+  color: #f0f1f2 !important;
+}
+
+/* Tailwind's .collapse utility conflicts with Bootstrap collapse component. */
+.navbar .collapse,
+.navbar .collapsing,
+.navbar .collapse.show {
+  visibility: visible !important;
+}
+
+.nav__style {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+@media screen and (max-width: 767px) {
+  .language-toggle {
+    top: 0.35rem;
+    right: 0.5rem;
+  }
+
+  .language-toggle .btn {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+}

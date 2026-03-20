@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const { lang } = Astro.params;
+
+if (lang !== "en" && lang !== "es") {
+  return Astro.redirect("/en/");
+}
+
+const isEs = lang === "es";
+
+const title = isEs ? "Los Tres Primos - Nosotros" : "Los Tres Primos - About";
+const description = isEs
+  ? "Conoce mas sobre LTP, estudio indie de desarrollo de videojuegos."
+  : "Learn about LTP Indie Game Development Studio.";
+---
+
+<BaseLayout lang={lang} currentPage="about" title={title} description={description}>
+  <header class="container-fluid header__bar d-flex flex-column justify-content-center">
+    <div class="d-flex justify-content-between align-items-center text-center">
+      <i class="me-3 fa-solid fa-circle-info fa-2x"></i>
+      <h1 class="article__title m-0 self-align-center">{isEs ? "Nosotros" : "About"}</h1>
+      <i class="ms-3 fa-solid fa-circle-info fa-2x"></i>
+    </div>
+  </header>
+
+  <section class="container-fluid pt-3 px-4">
+    <article class="article__container pt-3 px-3 rounded-3">
+      <div class="row justify-content-around">
+        <div data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" data-aos-delay="0" class="col-12 col-sm-6 col-md-6 col-xxl-3 mb-4">
+          <div class="card bg-dark text-white">
+            <img src="/img/history.png" class="card-img card--shadow" alt="ltp game image" />
+            <div class="card-img-overlay bg-black card--overlay bg-opacity-50">
+              <div class="card__overlay--about">
+                <h5 class="card-title article__subtitle">{isEs ? "Historia" : "History"}</h5>
+                <p class="card-text">
+                  {isEs
+                    ? "Los Tres Primos es un estudio chileno de videojuegos nacido en agosto de 2020 por tres primos: Snow, Alexanderk y Pancho."
+                    : "Los Tres Primos is a chilean Videogame Developer Studio born in August, 2020 by three cousins: Snow, Alexanderk and Pancho."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="fade-left" data-aos-duration="1000" data-aos-once="true" data-aos-delay="200" class="col-12 col-sm-6 col-md-6 col-xxl-3 mb-4">
+          <div class="card bg-dark text-white">
+            <img src="/img/learning_path.png" class="card-img card--shadow" alt="ltp game image" />
+            <div class="card-img-overlay card--overlay">
+              <div class="card__overlay--about">
+                <h5 class="card-title article__subtitle">{isEs ? "Formacion" : "Learning Path"}</h5>
+                <p class="card-text">
+                  {isEs
+                    ? "Estamos en profesionalizacion continua con academias de e-learning de alto nivel."
+                    : "We are in continously professionalization with outstandard E-learning Academies."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" data-aos-delay="400" class="col-12 col-sm-6 col-md-6 col-xxl-3 mb-4">
+          <div class="card bg-dark text-white">
+            <img src="/img/our_mission.png" class="card-img card--shadow" alt="ltp members photo" />
+            <div class="card-img-overlay bg-black card--overlay bg-opacity-75">
+              <div class="card__overlay--about">
+                <h5 class="card-title article__subtitle">{isEs ? "Nuestra mision" : "Our Mission"}</h5>
+                <p class="card-text">
+                  {isEs
+                    ? "Queremos compartir el amor por los videojuegos con el mundo."
+                    : "We just want to share the love of videogames with the world."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="row justify-content-center">
+      <img src="/img/Plans.png" alt="a draw of us designing games" class="col-10 col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-5" />
+    </div>
+  </section>
+</BaseLayout>

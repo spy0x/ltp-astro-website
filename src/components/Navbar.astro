@@ -1,0 +1,81 @@
+---
+interface Props {
+  lang: "en" | "es";
+  currentPage: "home" | "about" | "projects" | "team" | "contact";
+}
+
+const { lang, currentPage } = Astro.props;
+
+const nav = {
+  en: {
+    home: "Home",
+    about: "About",
+    projects: "Projects",
+    team: "Team",
+    contact: "Contact"
+  },
+  es: {
+    home: "Inicio",
+    about: "Nosotros",
+    projects: "Proyectos",
+    team: "Equipo",
+    contact: "Contacto"
+  }
+};
+
+const pagePath = {
+  home: "",
+  about: "about",
+  projects: "projects",
+  team: "team",
+  contact: "contact"
+};
+
+const otherLang: "en" | "es" = lang === "en" ? "es" : "en";
+const switchPath = pagePath[currentPage] ? `/${otherLang}/${pagePath[currentPage]}/` : `/${otherLang}/`;
+const switchLabel = lang === "en" ? "ES" : "EN";
+---
+
+<nav class="navbar navbar-dark navbar-expand-md sticky-top nav__style position-relative">
+  <div class="language-toggle">
+    <a href={switchPath} class="btn button" aria-label={lang === "en" ? "Switch to Spanish" : "Cambiar a ingles"}>
+      {switchLabel}
+    </a>
+  </div>
+
+  <div class="container-fluid">
+    <a class="navbar-brand" href={`/${lang}/`}>
+      <img src="/img/navbar_logo.png" alt="logo menu" id="nav__logo" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav mx-auto text-center nav__items">
+        <a class={`nav-link ${currentPage === "home" ? "active nav-link-current" : ""}`} href={`/${lang}/`}>
+          <span class="fa-solid fa-house mx-1"></span>{nav[lang].home}
+        </a>
+        <a class={`nav-link ${currentPage === "about" ? "active nav-link-current" : ""}`} href={`/${lang}/about/`}>
+          <span class="fa-solid fa-circle-info mx-1"></span>{nav[lang].about}
+        </a>
+        <a class={`nav-link ${currentPage === "projects" ? "active nav-link-current" : ""}`} href={`/${lang}/projects/`}>
+          <span class="fa-solid fa-diagram-project mx-1"></span>{nav[lang].projects}
+        </a>
+        <a class={`nav-link ${currentPage === "team" ? "active nav-link-current" : ""}`} href={`/${lang}/team/`}>
+          <span class="fa-solid fa-users mx-1"></span>{nav[lang].team}
+        </a>
+        <a class={`nav-link ${currentPage === "contact" ? "active nav-link-current" : ""}`} href={`/${lang}/contact/`}>
+          <span class="fa-solid fa-at mx-1"></span>{nav[lang].contact}
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

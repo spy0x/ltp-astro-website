@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const { lang } = Astro.params;
+
+if (lang !== "en" && lang !== "es") {
+  return Astro.redirect("/en/");
+}
+
+const isEs = lang === "es";
+
+const title = isEs ? "Los Tres Primos - Equipo" : "Los Tres Primos - Team";
+const description = isEs
+  ? "Conoce al equipo de LTP Indie Game Development Studio."
+  : "More about our team members working at LTP Indie Game Development Studio.";
+---
+
+<BaseLayout lang={lang} currentPage="team" title={title} description={description}>
+  <header class="container-fluid header__bar d-flex flex-column justify-content-center">
+    <div class="d-flex justify-content-between align-items-center text-center">
+      <i class="me-3 fa-solid fa-users fa-2x"></i>
+      <h1 class="article__title m-0">{isEs ? "Equipo" : "Team"}</h1>
+      <i class="ms-3 fa-solid fa-users fa-2x"></i>
+    </div>
+  </header>
+
+  <section class="container-fluid pt-3 px-4">
+    <article class="article__container rounded-3 px-3">
+      <div class="row justify-content-around mt-4">
+        <div data-aos="zoom-in-down" data-aos-duration="1500" data-aos-once="true" data-aos-delay="0" class="col-12 col-md-6 col-lg-4 mb-4">
+          <div class="card article__card--team card--shadow">
+            <div class="article__card__img--team text-center">
+              <img src="/img/lach.png" class="card__img--circle" alt="Snow Profile Photo" />
+            </div>
+            <div class="card-body text-center">
+              <h4 class="card-title article__subtitle text-uppercase">SnowTheArticFox</h4>
+              <p class="fs-5 m-0">2D Artist</p>
+              <p class="fs-5 m-0">{isEs ? "Disenador de sonido" : "Sound Designer"}</p>
+              <p class="fs-5 m-0">C# Developer</p>
+              <p class="fs-5 m-0">Unity Game Developer</p>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="zoom-in-down" data-aos-duration="1500" data-aos-once="true" data-aos-delay="200" class="col-12 col-md-6 col-lg-4 mb-4">
+          <div class="card article__card--team card--shadow">
+            <div class="article__card__img--team text-center">
+              <img src="/img/tom.png" class="card__img--circle" alt="Alexanderk Profile Photo" />
+            </div>
+            <div class="card-body text-center">
+              <h4 class="card-title article__subtitle text-uppercase">Alexanderk</h4>
+              <p class="fs-5 m-0">3D Artist</p>
+              <p class="fs-5 m-0">C# Developer</p>
+              <p class="fs-5 m-0">{isEs ? "Disenador de juego" : "Game Designer"}</p>
+              <p class="fs-5 m-0">Unity Game Developer</p>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="zoom-in-down" data-aos-duration="1500" data-aos-once="true" data-aos-delay="400" class="col-12 col-md-6 col-lg-4 mb-4">
+          <div class="card article__card--team card--shadow">
+            <div class="article__card__img--team text-center">
+              <img src="/img/pancho.png" class="card__img--circle" alt="Pancho Profile Photo" />
+            </div>
+            <div class="card-body text-center">
+              <h4 class="card-title article__subtitle text-uppercase">Pancho</h4>
+              <p class="fs-5 m-0">{isEs ? "Compositor" : "Composer"}</p>
+              <p class="fs-5 m-0">C# Developer</p>
+              <p class="fs-5 m-0">{isEs ? "Trainee fullstack Python" : "Fullstack Python Trainee"}</p>
+              <p class="fs-5 m-0">Unity Game Developer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="row justify-content-center">
+      <img src="/img/slep.png" alt="a draw of Pancho taking a nap" class="col-10 col-sm-6 col-md-6 col-lg-4 col-xl-3" />
+    </div>
+  </section>
+</BaseLayout>

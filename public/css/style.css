@@ -1,0 +1,265 @@
+.article__container {
+  border: 1px solid black;
+  background-color: #212529;
+  -webkit-box-shadow: 5px 8px 14px 2px rgba(0, 0, 0, 0.72);
+  box-shadow: 5px 8px 14px 2px rgba(0, 0, 0, 0.72);
+}
+
+.card--shadow {
+  -webkit-box-shadow: 5px 5px 13px 5px rgba(0, 0, 0, 0.78);
+  box-shadow: 5px 5px 13px 5px rgba(0, 0, 0, 0.78);
+}
+.card--overlay {
+  transition: all 1s;
+  text-align: center;
+}
+.card--overlay:hover {
+  opacity: 0;
+}
+.card--overlay:focus {
+  opacity: 0;
+}
+
+.card__img--circle {
+  border-radius: 50%;
+  width: 75%;
+  display: block;
+  margin: 1rem auto;
+}
+
+.button, .form__button {
+  background-color: rgb(163, 0, 0);
+  border-color: rgb(46, 0, 0);
+  color: #F0F1F2;
+  font-family: "Playfair Display SC", serif;
+  font-size: 1.5rem;
+}
+.button:hover, .form__button:hover {
+  background-color: rgb(94, 0, 0);
+  border-color: rgb(197, 2, 2);
+}
+.button:focus, .form__button:focus {
+  background-color: rgb(94, 0, 0);
+  border-color: rgb(197, 2, 2);
+}
+
+.article__grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  column-gap: 1rem;
+  row-gap: 2rem;
+  align-items: center;
+}
+
+@media screen and (min-width: 576px) {
+  .article__grid {
+    column-gap: 2rem;
+  }
+}
+/* RESET CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #F0F1F2;
+}
+
+/* 
+FONTS INSTALADAS DE GOOGLE FONTS
+font-family: 'Oswald', sans-serif;
+font-family: 'Playfair Display SC', serif; 
+font-family: 'Hubballi', cursive;
+font-family: 'Homenaje', sans-serif;
+font-family: 'Black Ops One', cursive;
+*/
+p {
+  line-height: 1.4rem;
+}
+
+.article__title, .article__subtitle {
+  font-size: 2.5rem;
+  font-family: "Black Ops One", cursive;
+  text-shadow: 5px 6px 6px black;
+}
+
+.article__subtitle {
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .article__title, .article__subtitle {
+    font-size: 3rem;
+  }
+  .article__subtitle {
+    font-size: 1.5rem;
+  }
+  .footer__text {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  p {
+    font-size: 1.5rem;
+  }
+}
+nav ul {
+  margin-bottom: 0;
+}
+
+.nav__items {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: rgb(223, 223, 223);
+  font-family: "Homenaje", sans-serif;
+}
+.nav__items a:hover {
+  text-decoration: underline;
+}
+
+.nav__style {
+  background-image: linear-gradient(#17191A, #212529);
+  padding: 2vh;
+  border-bottom: 1px solid black;
+  min-height: 10vh;
+}
+
+#nav__logo {
+  height: 5vh;
+  animation-name: displayLogo;
+  animation-timing-function: ease-in;
+  animation-duration: 2s;
+}
+
+@keyframes displayLogo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.header, .header__bar {
+  background-image: url("../img/PixelArt/objetos/FondoBIG.png");
+  background-size: contain;
+  /* background-color: $background-dark; */
+  background-repeat: repeat-x;
+  height: 30vh;
+}
+
+.header__bar {
+  height: 10vh;
+  padding: 2vh;
+}
+
+header img {
+  height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+body {
+  /* background-color: $background-dark; */
+  background-image: linear-gradient(#17191A, #17191A, rgb(18, 18, 18));
+  font-family: "Hubballi", cursive;
+  text-shadow: 5px 4px 5px rgba(0, 0, 0, 0.66);
+}
+
+section {
+  min-height: 72vh;
+}
+
+.footer__container {
+  background-image: linear-gradient(#212529, #17191A);
+  padding: 2vh;
+  border-top: 1px solid black;
+  height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__text {
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Anton", sans-serif;
+  margin-bottom: 0;
+  text-align: center;
+  text-shadow: 5px 6px 6px black;
+}
+
+.section--index {
+  min-height: 52vh;
+}
+
+.article__container__img--index, .article__container__img--projects {
+  background-color: #17191A;
+  width: 100%;
+  max-width: 125px;
+  box-shadow: 5px 5px 13px 5px rgba(0, 0, 0, 0.78);
+}
+
+.aside__title {
+  font-family: "Press Start 2P", cursive;
+  animation-name: fadingTitle;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fadingTitle {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.card__overlay--about {
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+.article__card--projects {
+  border: 1px solid black;
+  background-color: #212529;
+  border-radius: 0.5rem;
+  text-align: center;
+  height: 100%;
+}
+
+.article__container__img--projects {
+  max-width: 250px;
+  justify-self: center;
+}
+
+.article__card--team {
+  background-color: #17191A;
+  height: 100%;
+  max-width: 20rem;
+  margin: auto;
+}
+.article__card__img--team {
+  background-color: #101112;
+}
+
+.form__button {
+  font-size: 1rem;
+}
+
+.form__img {
+  width: 10rem;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+#form__textArea {
+  height: 125px;
+}
+
+/*# sourceMappingURL=style.css.map */

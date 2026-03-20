@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const { lang } = Astro.params;
+
+if (lang !== "en" && lang !== "es") {
+  return Astro.redirect("/en/");
+}
+
+const isEs = lang === "es";
+
+const title = isEs ? "Los Tres Primos - Proyectos" : "Los Tres Primos - Projects";
+const description = isEs
+  ? "Proyectos y juegos creados por LTP Indie Game Development Studio."
+  : "Projects and Games made by LTP Indie Game Development Studio.";
+---
+
+<BaseLayout lang={lang} currentPage="projects" title={title} description={description}>
+  <header class="container-fluid header__bar d-flex flex-column justify-content-center">
+    <div class="d-flex justify-content-between align-items-center text-center">
+      <i class="me-3 fa-solid fa-diagram-project fa-2x"></i>
+      <h1 class="article__title m-0">{isEs ? "Proyectos" : "Projects"}</h1>
+      <i class="ms-3 fa-solid fa-diagram-project fa-2x"></i>
+    </div>
+  </header>
+
+  <section class="container-fluid py-3 px-4">
+    <div class="row justify-content-around">
+      <div data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" class="col-12 col-md-6 col-lg-3 mb-3">
+        <article class="card card--shadow article__card--projects">
+          <img src="/img/theatre_game.png" class="card-img-top" alt="juego The Theatre" />
+          <div class="card-body">
+            <h3 class="article__subtitle">The Theatre</h3>
+            <p class="card-text">{isEs ? "Un juego de horror y supervivencia en tercera persona que ocurre en un teatro clasico." : "A third person survival horror game ocurrying in a Classical Theatre."}</p>
+          </div>
+        </article>
+      </div>
+
+      <div data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" data-aos-delay="200" class="col-12 col-md-6 col-lg-3 mb-3">
+        <article class="card card--shadow article__card--projects">
+          <img src="/img/the_lamson_room.png" alt="juego The Lamson Room" class="card-img-top" />
+          <div class="card-body">
+            <h3 class="article__subtitle">The Lamson Room</h3>
+            <p class="card-text">{isEs ? "Un juego point-and-click ubicado en un mundo distopico postapocaliptico." : "A Point-n-click game placed in a distopic postapocaliptic world."}</p>
+          </div>
+        </article>
+      </div>
+
+      <div data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" data-aos-delay="400" class="col-12 col-md-6 col-lg-3 mb-3">
+        <article class="card card--shadow article__card--projects">
+          <img src="/img/the_keepers.png" alt="juego The Keepers" class="card-img-top" />
+          <div class="card-body">
+            <h3 class="article__subtitle">The Keepers</h3>
+            <p class="card-text">{isEs ? "Un juego cooperativo multiplayer de horror donde juegas como guardia en un cementerio." : "A Co-op Multiplayer horror game playing as guards in a cemetery."}</p>
+          </div>
+        </article>
+      </div>
+
+      <div data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" data-aos-delay="600" class="col-12 col-md-6 col-lg-3 mb-3">
+        <article class="card card--shadow article__card--projects">
+          <img src="/img/bakery_street_legacy.png" alt="juego Bakery Street Legacy" class="card-img-top" />
+          <div class="card-body">
+            <h3 class="article__subtitle">Bakery Street Legacy</h3>
+            <p class="card-text">{isEs ? "Un juego de simulacion estilo tycoon low-poly sobre administrar una panaderia." : "A low-poly simulation Tycoon game in charge of a Bakery Shop."}</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <article class="article__container rounded-3 px-4 p-4">
+      <h2 class="article__title text-center mb-5">{isEs ? "Juegos de Game Jam" : "Game Jam Games"}</h2>
+      <div class="article__grid">
+        <img src="/img/christmas_tale.png" alt="imagen juego A Christmas Tale" class="article__container__img--projects" />
+        <div data-aos="fade" data-aos-duration="1000" data-aos-delay="0" data-aos-once="true">
+          <h3 class="article__subtitle">A Christmas Tale</h3>
+          <p>{isEs ? "Mientras esperas a Santa en la chimenea, escuchas fuertes pasos en el techo. Ya llego Santa?" : "When waiting for Santa to come down the chimney, loud stomps can be heard on the ceiling, is Santa here?"}</p>
+        </div>
+      </div>
+      <div data-aos="zoom-in" data-aos-duration="500" data-aos-once="true" class="row justify-content-center mb-5">
+        <a class="col-4 col-md-2 btn button" href="https://mralexanderk.itch.io/a-christmas-tale" target="_blank" rel="noreferrer" role="button">{isEs ? "Jugar" : "Play"}</a>
+      </div>
+
+      <div class="article__grid">
+        <img src="/img/natures_call.jpg" alt="imagen juego Nature's Call" class="article__container__img--projects" />
+        <div data-aos="fade" data-aos-duration="1000" data-aos-delay="200" data-aos-once="true">
+          <h3 class="article__subtitle">Nature's Call</h3>
+          <p>{isEs ? "Te duele mucho el estomago y necesitas llegar al bano. Podras llegar a tiempo?" : "Your stomach hurts a lot and you really need to go to the bathroom, can you make it in time?"}</p>
+        </div>
+      </div>
+      <div data-aos="zoom-in" data-aos-duration="500" data-aos-once="true" class="row justify-content-center mb-2">
+        <a class="col-4 col-md-2 btn button" href="https://mralexanderk.itch.io/natures-call" target="_blank" rel="noreferrer" role="button">{isEs ? "Jugar" : "Play"}</a>
+      </div>
+    </article>
+  </section>
+</BaseLayout>

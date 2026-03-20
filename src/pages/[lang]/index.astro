@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const { lang } = Astro.params;
+
+if (lang !== "en" && lang !== "es") {
+  return Astro.redirect("/en/");
+}
+
+const isEs = lang === "es";
+
+const title = isEs ? "Los Tres Primos - Inicio" : "Los Tres Primos - Home";
+const description = isEs
+  ? "Sitio oficial del estudio indie de desarrollo de videojuegos."
+  : "Indie Game Development Studio Official Website.";
+---
+
+<BaseLayout lang={lang} currentPage="home" title={title} description={description}>
+  <header class="container-fluid header">
+    <img src="/img/PixelArt/us_pixelart.png" alt="header pixelart image" />
+  </header>
+
+  <section class="container-fluid px-4 py-3 section--index">
+    <article class="article__container rounded-3 py-5 px-3">
+      <div class="article__grid">
+        <div data-aos="fade-right" data-aos-duration="1000" data-aos-delay="0" data-aos-once="true" class="article__container__img--index w-100 m-auto rounded-4 border border-light border-opacity-50 p-3">
+          <img src="/img/Logo_LTP.svg" alt="icono los tres primos" />
+        </div>
+        <div data-aos="fade" data-aos-duration="1000" data-aos-delay="0" data-aos-once="true">
+          <h3 class="article__subtitle">LTP</h3>
+          <p class="m-0">
+            {isEs
+              ? "Los Tres Primos es un estudio chileno indie de desarrollo de videojuegos creado por tres primos."
+              : "Los Tres Primos is an indie chilean Game Development Studio made by three cousins."}
+          </p>
+        </div>
+
+        <div data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200" data-aos-once="true" class="article__container__img--index w-100 m-auto rounded-4 border border-light border-opacity-50 p-3">
+          <img src="/img/console-controller.svg" alt="icon los tres primos" />
+        </div>
+        <div data-aos="fade" data-aos-duration="1000" data-aos-delay="200" data-aos-once="true">
+          <h3 class="article__subtitle">Engine</h3>
+          <p class="m-0">
+            {isEs
+              ? "Desarrollamos juegos 2D y 3D constantemente con Unity Game Engine."
+              : "We are constantly developing 2D & 3D Games with Unity Game Engine Software."}
+          </p>
+        </div>
+
+        <div data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400" data-aos-once="true" class="article__container__img--index w-100 m-auto rounded-4 border border-light border-opacity-50 p-3">
+          <img src="/img/cube.svg" alt="icon los tres primos" />
+        </div>
+        <div data-aos="fade" data-aos-duration="1000" data-aos-delay="400" data-aos-once="true">
+          <h3 class="article__subtitle">Design</h3>
+          <p class="m-0">
+            {isEs
+              ? "Usamos Blender y Aseprite para crear assets 3D y 2D para videojuegos."
+              : "Using Blender and Aseprite for 3D and 2D Game Asset Creation."}
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <aside class="container-fluid">
+      <h2 class="text-center aside__title my-5 lh-base">
+        {isEs ? "Nuestros juegos de Game Jam" : "Our Game Jam Games"}
+      </h2>
+      <div class="row justify-content-center">
+        <iframe class="col-12 col-xl-6 mb-3" src="https://itch.io/embed/1549614?dark=true" height="167"><a href="https://mralexanderk.itch.io/a-christmas-tale">A Christmas Tale</a></iframe>
+        <iframe class="col-12 col-xl-6 mb-3" src="https://itch.io/embed/1315670?dark=true" height="167"><a href="https://mralexanderk.itch.io/natures-call">Nature's Call</a></iframe>
+      </div>
+    </aside>
+  </section>
+</BaseLayout>
