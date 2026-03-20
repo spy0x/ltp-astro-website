@@ -18,9 +18,11 @@ const footerText = lang === "en"
 const socialTitle = "Los Tres Primos";
 const socialDescription = "LTP GameDev Studio";
 const socialImagePath = "/img/PixelArt/us_pixelart.png";
-const baseUrl = Astro.site ?? Astro.url;
+
+// Construct absolute URLs
+const baseUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://ltp-astro-website.vercel.app';
 const canonicalUrl = new URL(Astro.url.pathname, baseUrl).toString();
-const socialImageUrl = new URL(socialImagePath, baseUrl).toString();
+const socialImageUrl = `${baseUrl}${socialImagePath}`;
 ---
 
 <!doctype html>
