@@ -49,6 +49,9 @@ const description = isEs
               <label for="message">{isEs ? "Mensaje" : "Message"}</label>
               <textarea id="form__textArea" class="form-control text-dark" placeholder={isEs ? "Escribe tu mensaje aquí." : "Your message here."} name="message" required></textarea>
             </div>
+            <div class="d-flex justify-content-center mt-3">
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAACtxAEFYodhrf7zY"></div>
+            </div>
             <div data-aos="zoom-in" data-aos-duration="500" data-aos-once="true">
               <button type="submit" form="formulario" value="Submit" class="btn form__button d-block mx-auto mt-3">{isEs ? "Enviar" : "Send"}</button>
             </div>
@@ -60,6 +63,8 @@ const description = isEs
     </article>
   </section>
 </BaseLayout>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <script>
   const formElement = document.getElementById("formulario");
@@ -77,8 +82,8 @@ const description = isEs
     const feedbackEl: HTMLElement = feedback;
     const submitBtn: HTMLButtonElement = submitButton;
     const startedInput: HTMLInputElement = startedAtField;
-    const startedAt = Date.now();
-    startedInput.value = String(startedAt);
+    let formStartedAt = Date.now();
+    startedInput.value = String(formStartedAt);
 
     const isSpanish = form.dataset.lang === "es";
 
@@ -91,14 +96,24 @@ const description = isEs
       spam: isSpanish
         ? "Por favor espera unos segundos antes de enviar el formulario."
         : "Please wait a few seconds before submitting the form.",
+      captcha: isSpanish
+        ? "Por favor completa la verificación anti-bot."
+        : "Please complete the anti-bot verification.",
     };
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      const elapsedMs = Date.now() - startedAt;
+      const elapsedMs = Date.now() - formStartedAt;
       if (elapsedMs < 3000) {
         feedbackEl.textContent = messages.spam;
+        feedbackEl.className = "text-center mt-3 mb-0 small text-warning";
+        return;
+      }
+
+      const tokenInput = form.querySelector('input[name="cf-turnstile-response"]');
+      if (!(tokenInput instanceof HTMLInputElement) || !tokenInput.value) {
+        feedbackEl.textContent = messages.captcha;
         feedbackEl.className = "text-center mt-3 mb-0 small text-warning";
         return;
       }
@@ -122,7 +137,14 @@ const description = isEs
         }
 
         form.reset();
-        startedInput.value = String(Date.now());
+        formStartedAt = Date.now();
+        startedInput.value = String(formStartedAt);
+
+        const turnstileApi = (window as unknown as { turnstile?: { reset: () => void } }).turnstile;
+        if (turnstileApi?.reset) {
+          turnstileApi.reset();
+        }
+
         feedbackEl.textContent = messages.success;
         feedbackEl.className = "text-center mt-3 mb-0 small text-success";
       } catch {
